@@ -249,7 +249,7 @@ public class Main extends Application {
                     }
                 }, 10,30);
     }
-sdv
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         VBox rootNode = new VBox();
