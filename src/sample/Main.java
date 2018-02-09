@@ -234,18 +234,21 @@ public class Main extends Application {
                             data4 = listener.getBuffer4();
                             data5 = listener.getBuffer5();
                         }
+//                        if (udpListener.received) {
+//                            batteryTile.setValue(data1[0]);
+//                            udpListener.received = false;
+//                        }
 
-                            rpmGauge.setValue(data1[0] << 8 | data1[1]);
-                            oilPressTile.setValue(data1[2] << 8 | data1[3]);
-                            fuelGauge.setValue(data1[4] << 8 | data1[5]);
-                            throttlePositionGauge.setValue(data1[6] / 100.0);
-                            vehicleSpeedGauge.setValue(data1[7]);
-                            brakePressureGauge.setValue(data2[0] / MAX_BRAKE_PRESSURE);
+                            rpmGauge.setValue(data1[1] << 8 | data1[2]);
+                            oilPressTile.setValue(data1[3] << 8 | data1[4]);
+                            fuelGauge.setValue(data1[5] << 8 | data1[6]);
+                            throttlePositionGauge.setValue(data1[7] / 100.0);
+                            vehicleSpeedGauge.setValue(data1[8]);
+                            brakePressureGauge.setValue(data2[1] / MAX_BRAKE_PRESSURE);
                             //   gearTile.setDescription(Integer.toString((int)data2[6]));
-                            engTempGauge.setValue((double) data3[0]);
-                            oilTempGauge.setValue((double) data3[1]);
-                            batteryTile.setValue(data3[3] / 10.0);
-
+                            engTempGauge.setValue((double) data3[1]);
+                            oilTempGauge.setValue((double) data3[2]);
+                            batteryTile.setValue((data3[3] & 0x000000FF) / 10.0); //convert to unsigned int
                     }
                 }, 10,30);
     }

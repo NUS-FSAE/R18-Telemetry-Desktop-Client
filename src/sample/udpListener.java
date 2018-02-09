@@ -3,8 +3,9 @@ import java.io.*;
 import java.net.*;
 
 public class udpListener implements Runnable{
+    public static Boolean received = false;
     private static final int PORT = 8018;
-    private static final int PACKET_SIZE = 8;
+    private static final int PACKET_SIZE = 9;
     private byte[] data = new byte[PACKET_SIZE];
     private byte[] buffer1 = new byte[PACKET_SIZE];
     private byte[] buffer2 = new byte[PACKET_SIZE];
@@ -24,20 +25,20 @@ public class udpListener implements Runnable{
                     socket.receive(packet);
                     synchronized (lock) {
                         switch (packet.getData()[0]) {
-                            case (byte)0x640:
-                                buffer1 = packet.getData();
+                            case 0x40:
+                                System.arraycopy(packet.getData(),0,buffer1,0,PACKET_SIZE);
                                 break;
-                            case (byte)0x641:
-                                buffer2 = packet.getData();
+                            case 0x41:
+                                System.arraycopy(packet.getData(),0,buffer2,0,PACKET_SIZE);
                                 break;
-                            case (byte)0x642:
-                                buffer3 = packet.getData();
+                            case 0x42:
+                                System.arraycopy(packet.getData(),0,buffer3,0,PACKET_SIZE);
                                 break;
-                            case (byte)0x643:
-                                buffer4 = packet.getData();
+                            case 0x43:
+                                System.arraycopy(packet.getData(),0,buffer4,0,PACKET_SIZE);
                                 break;
-                            case (byte)0x644:
-                                buffer5 = packet.getData();
+                            case 0x44:
+                                System.arraycopy(packet.getData(),0,buffer5,0,PACKET_SIZE);
                                 break;
                             default:
                                 break;
